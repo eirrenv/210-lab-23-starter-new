@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <random> // for random selection :)
 #include "Goat.h"
 using namespace std;
 
@@ -54,7 +55,8 @@ int main_menu() {
         }
 
         if (choice == 1) {
-            cout << "You have chosen to add a goat. " ;
+            cout << "You have chosen to add a goat. " << endl;
+
             return choice;
         }
         else if (choice == 2) {
@@ -73,3 +75,18 @@ int main_menu() {
     }
 }
 
+int select_goat(list<Goat> trip) {
+    return -1;
+}
+
+void delete_goat(list<Goat> &trip) {
+
+}
+
+void add_goat(list<Goat> &trip, string [], string []) {
+
+}
+
+void display_trip(list<Goat> trip) {
+
+}
