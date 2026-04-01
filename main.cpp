@@ -29,6 +29,9 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    // testing, confirmed working :)
+    main_menu();
+
 
 
 
@@ -47,10 +50,10 @@ int main_menu() {
         cout << "Choice --> ";
         cin >> choice;
         if (choice < 1 || choice > 4) {
-            cout << "Invalid choice. Please input a number between 1 to 4: ";
-            cin >> choice;
+            cout << "Invalid choice. Please input a number between 1 to 4" << endl;
         }
-        else if (choice == 1) {
+
+        if (choice == 1) {
             cout << "You have chosen to add a goat. " ;
             return choice;
         }
@@ -68,7 +71,5 @@ int main_menu() {
         }
 
     }
-    
-
 }
 
