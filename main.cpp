@@ -16,7 +16,7 @@ int main_menu();
 
 int main() {
     srand(time(0));
-    bool again;
+    bool again = true;
     int choice;
 
     // create Goat list containing goats
@@ -34,10 +34,20 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    // testing, confirmed working :)
-    choice = main_menu();
-    if (choice == 1) {
-        // add_goat();
+    while (again) {
+        choice = main_menu();
+        if ( choice == 1 ) {
+            add_goat(goatList, names, colors);
+        }
+        else if ( choice == 2 ) {
+            // delete_goat();
+        }
+        else if ( choice == 3 ) {
+            display_trip(goatList);
+        }
+        else {
+            again = false;
+        }
     }
 
 
@@ -60,7 +70,12 @@ int main_menu() {
         if (choice < 1 || choice > 4) {
             cout << "Invalid choice. Please input a number between 1 to 4" << endl;
         }
-
+        else {
+            return choice;
+        }
+        
+        /*
+        code for testing, confirmed working
         if (choice == 1) {
             cout << "You have chosen to add a goat. " << endl;
             return choice;
@@ -77,6 +92,7 @@ int main_menu() {
             cout << "You have chosen to quit. " ;
             return choice;
         }
+        */
 
     }
 }
@@ -90,10 +106,17 @@ void delete_goat(list<Goat> &trip) {
 }
 
 void add_goat(list<Goat> &trip, string nm[], string clr[]) {
-    Goat tmpGoat(nm[rand() % SZ_NAMES], rand() % MAX_AGE + 1, clr[rand() % SZ_COLORS]);
+    string name = nm[rand() % SZ_NAMES];
+    int age = rand() % MAX_AGE + 1;
+    string color = clr[rand() % SZ_COLORS];
+    Goat tmpGoat(name, age, color);
     trip.push_back(tmpGoat);
 }
 
 void display_trip(list<Goat> trip) {
-
+    int j = 1;
+    for (auto it = trip.begin(); it != trip.end(); ++it) {
+        cout << "[" << j << "] " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")" << endl;
+        ++j;
+    }
 }
