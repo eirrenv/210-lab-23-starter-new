@@ -40,7 +40,7 @@ int main() {
             add_goat(goatList, names, colors);
         }
         else if ( choice == 2 ) {
-            // delete_goat();
+            delete_goat(goatList);
         }
         else if ( choice == 3 ) {
             display_trip(goatList);
@@ -49,9 +49,6 @@ int main() {
             again = false;
         }
     }
-
-
-
 
     return 0;
 }
@@ -73,36 +70,38 @@ int main_menu() {
         else {
             return choice;
         }
-        
-        /*
-        code for testing, confirmed working
-        if (choice == 1) {
-            cout << "You have chosen to add a goat. " << endl;
-            return choice;
-        }
-        else if (choice == 2) {
-            cout << "You have chosen to delete a goat. " ;
-            return choice;
-        }
-        else if (choice == 3) {
-            cout << "You have chosen to list the goats. " ;
-            return choice;
-        }
-        else if (choice == 4) {
-            cout << "You have chosen to quit. " ;
-            return choice;
-        }
-        */
-
     }
 }
 
 int select_goat(list<Goat> trip) {
-    return -1;
+    int choice;
+    bool again = true;
+    while (again) {
+        display_trip(trip);
+        cout << "Please choose a goat from the list: ";
+        cin >> choice;
+        if (choice < 1 || choice > trip.size()) {
+            cout << "Invalid input. Please input a number between 1 and " << trip.size() << ": ";
+        }
+        else {
+            return choice;
+        }
+    }
 }
 
 void delete_goat(list<Goat> &trip) {
-
+    // added catch for an empty list
+    if (trip.size() == 0) {
+        cout << "List is empty, cannot delete any goats" << endl;
+    } 
+    else {
+        int choice = select_goat(trip);
+        auto it = trip.begin();
+        advance(it, choice - 1);
+        cout << "Deleting " << it->get_name() << endl;
+        trip.erase(it);
+    }
+    
 }
 
 void add_goat(list<Goat> &trip, string nm[], string clr[]) {
@@ -114,9 +113,15 @@ void add_goat(list<Goat> &trip, string nm[], string clr[]) {
 }
 
 void display_trip(list<Goat> trip) {
-    int j = 1;
-    for (auto it = trip.begin(); it != trip.end(); ++it) {
-        cout << "[" << j << "] " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")" << endl;
-        ++j;
+    // catch for empty list
+    if (trip.size() == 0) {
+        cout << "List is empty." << endl;
+    }
+    else {
+        int j = 1;
+        for (auto it = trip.begin(); it != trip.end(); ++it) {
+            cout << "[" << j << "] " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")" << endl;
+            ++j;
+        }
     }
 }
